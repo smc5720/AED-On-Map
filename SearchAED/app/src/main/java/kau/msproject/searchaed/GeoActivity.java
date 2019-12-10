@@ -14,6 +14,10 @@ public class GeoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_geo);
 
+        Intent intent = getIntent();
+        Double lat = intent.getExtras().getDouble("lat");
+        Double lon = intent.getExtras().getDouble("lon");
+
         Button btnMain = (Button)findViewById(R.id.btn_main);
         btnMain.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -22,5 +26,6 @@ public class GeoActivity extends AppCompatActivity {
                 startActivity(mIntent);
             }
         });
+        
     }
 }

@@ -68,7 +68,6 @@ class EmergencyActivity2 : AppCompatActivity() {
         btnClose.setOnClickListener(){
             intent.putExtra("result", 1)
             setResult(Activity.RESULT_OK,intent)
-
             finish()
         }
     }

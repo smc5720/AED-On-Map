@@ -76,6 +76,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
            emergencyButton2.setOnClickListener(
            ){
                val emergencyIntent = Intent(activity,EmergencyActivity2::class.java)
+               var mylat : Double = 0.0
+               var mylon : Double = 0.0
                var database1: FirebaseDatabase = FirebaseDatabase.getInstance()
                var databaseReference: DatabaseReference = database1.getReference("user")
                databaseReference.addValueEventListener(object : ValueEventListener {
@@ -84,14 +86,17 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                        val tokenData = value.get(tokenID.toString()) as Map<String, Object>
                        var my_lat = tokenData.get("lat")
                        var my_lon = tokenData.get("lon")
-                       var mylat = my_lat.toString().toDouble()
-                       var mylon = my_lon.toString().toDouble()
+                       mylat = my_lat.toString().toDouble()
+                       mylon = my_lon.toString().toDouble()
                    }
+                   override fun onCancelled(error: DatabaseError) {
+                       Log.w("ERROR", "Failed to read value.", error.toException())
+                   }
+               })
                    emergencyIntent.putExtra("AED", infoOfAED[1])
                    emergencyIntent.putExtra("lat", mylat)
                    emergencyIntent.putExtra("lon", mylon)
                startActivity(emergencyIntent)
-
         }
 
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
