@@ -74,11 +74,24 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         //응급상황발생 버튼
            val emergencyButton2 = root.findViewById<Button>(R.id.btn_emergency2)
            emergencyButton2.setOnClickListener(
-
            ){
-            val emergencyIntent = Intent(activity,EmergencyActivity2::class.java)
-            emergencyIntent.putExtra("AED", infoOfAED[1])
-            startActivity(emergencyIntent)
+               val emergencyIntent = Intent(activity,EmergencyActivity2::class.java)
+               var database1: FirebaseDatabase = FirebaseDatabase.getInstance()
+               var databaseReference: DatabaseReference = database1.getReference("user")
+               databaseReference.addValueEventListener(object : ValueEventListener {
+                   override fun onDataChange(dataSnapshot: DataSnapshot) {
+                       val value = dataSnapshot.value as Map<String, Object>
+                       val tokenData = value.get(tokenID.toString()) as Map<String, Object>
+                       var my_lat = tokenData.get("lat")
+                       var my_lon = tokenData.get("lon")
+                       var mylat = my_lat.toString().toDouble()
+                       var mylon = my_lon.toString().toDouble()
+                   }
+                   emergencyIntent.putExtra("AED", infoOfAED[1])
+                   emergencyIntent.putExtra("lat", mylat)
+                   emergencyIntent.putExtra("lon", mylon)
+               startActivity(emergencyIntent)
+
         }
 
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
