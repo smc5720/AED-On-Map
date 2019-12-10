@@ -18,6 +18,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static java.sql.DriverManager.println;
+
 public class GeoActivity extends AppCompatActivity {
 
     Double lat;
@@ -32,6 +34,8 @@ public class GeoActivity extends AppCompatActivity {
         lat = intent.getExtras().getDouble("lat");
         lon = intent.getExtras().getDouble("lon");
 
+        System.out.println("geolat" + lat);
+        System.out.println("geolon" + lon);
         MyAsyncTask mProcessTask = new MyAsyncTask();
         mProcessTask.execute();
     }
@@ -58,10 +62,13 @@ public class GeoActivity extends AppCompatActivity {
             String lat_st = lat.toString();
             String lon_st = lon.toString();
 
+            //lat_st = "127.5941234";
+            //lon_st = "37.4739193";
+
             //주소 -> 좌표로 변환 (geocoding)
             //HttpUrl.Builder urlBuilder = HttpUrl.parse("https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode?query=강남구 자곡로 101").newBuilder();
             //좌표 -> 주소로 변환 (Reverse geocoding)
-            HttpUrl.Builder urlBuilder = HttpUrl.parse("https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?request=coordsToaddr&coords=" + lat_st + "," + lon_st + "&output=json&orders=roadaddr").newBuilder();
+            HttpUrl.Builder urlBuilder = HttpUrl.parse("https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?request=coordsToaddr&coords=" + lon_st + "," + lat_st + "&output=json&orders=roadaddr").newBuilder();
             urlBuilder.addQueryParameter("X-NCP-APIGW-API-KEY-ID", "fbjwqr85b8");
             urlBuilder.addQueryParameter("X-NCP-APIGW-API-KEY", "QXU2NDyV3x1vyqHeOFaiNAffka71Ybw6ZxAIzjmp");
             String url = urlBuilder.build().toString();

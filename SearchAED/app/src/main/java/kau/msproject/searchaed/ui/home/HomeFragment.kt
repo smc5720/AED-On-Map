@@ -34,7 +34,7 @@ import kau.msproject.searchaed.R
 
 class HomeFragment : Fragment(), OnMapReadyCallback {
 
-    val dataNum:Int = 100;
+    val dataNum: Int = 100;
     private val REQUEST_CALL: Int = 1
     /*init {
         instance = this
@@ -45,18 +45,18 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     }*/
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var locationSource: FusedLocationSource
-    private lateinit var root : View
+    private lateinit var root: View
     val dataOfAED = arrayOfNulls<Map<String, Object>>(dataNum)
     val infoOfAED = arrayOfNulls<AedInfo>(dataNum) // intent로 넘겨주기 위해 설정
 
     // 카메라 무빙
-    var cameraLat:Double = 37.5666102
-    var cameraLon:Double = 126.9783881
+    var cameraLat: Double = 37.5666102
+    var cameraLon: Double = 126.9783881
 
     var checkState: Boolean = false
 
     // 토큰 값
-    val tokenID : String?= FirebaseInstanceId.getInstance().getToken()
+    val tokenID: String? = FirebaseInstanceId.getInstance().getToken()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,31 +72,33 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             ViewModelProviders.of(this).get(HomeViewModel::class.java)
         root = inflater.inflate(R.layout.home_fragment, container, false)
         //응급상황발생 버튼
-           val emergencyButton2 = root.findViewById<Button>(R.id.btn_emergency2)
-           emergencyButton2.setOnClickListener(
-           ){
-               val emergencyIntent = Intent(activity,GeoActivity::class.java)
-               var mylat : Double = 0.0
-               var mylon : Double = 0.0
-               var database1: FirebaseDatabase = FirebaseDatabase.getInstance()
-               var databaseReference: DatabaseReference = database1.getReference("user")
-               databaseReference.addValueEventListener(object : ValueEventListener {
-                   override fun onDataChange(dataSnapshot: DataSnapshot) {
-                       val value = dataSnapshot.value as Map<String, Object>
-                       val tokenData = value.get(tokenID.toString()) as Map<String, Object>
-                       var my_lat = tokenData.get("lat")
-                       var my_lon = tokenData.get("lon")
-                       mylat = my_lat.toString().toDouble()
-                       mylon = my_lon.toString().toDouble()
-                   }
-                   override fun onCancelled(error: DatabaseError) {
-                       Log.w("ERROR", "Failed to read value.", error.toException())
-                   }
-               })
-                   emergencyIntent.putExtra("AED", infoOfAED[1])
-                   emergencyIntent.putExtra("lat", mylat)
-                   emergencyIntent.putExtra("lon", mylon)
-               startActivity(emergencyIntent)
+        val emergencyButton2 = root.findViewById<Button>(R.id.btn_emergency2)
+        emergencyButton2.setOnClickListener(
+        ) {
+            val emergencyIntent = Intent(activity, GeoActivity::class.java)
+            var mylat: Double = 0.0
+            var mylon: Double = 0.0
+            var database1: FirebaseDatabase = FirebaseDatabase.getInstance()
+            var databaseReference: DatabaseReference = database1.getReference("user")
+            databaseReference.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val value = dataSnapshot.value as Map<String, Object>
+                    val tokenData = value.get(tokenID.toString()) as Map<String, Object>
+                    var my_lat = tokenData.get("lat")
+                    var my_lon = tokenData.get("lon")
+                    mylat = my_lat.toString().toDouble()
+                    mylon = my_lon.toString().toDouble()
+                    println("abcabc" + mylat)
+                    println("abcabc" + mylon)
+                    emergencyIntent.putExtra("AED", infoOfAED[1])
+                    emergencyIntent.putExtra("lat", mylat)
+                    emergencyIntent.putExtra("lon", mylon)
+                    startActivity(emergencyIntent)
+                }
+                override fun onCancelled(error: DatabaseError) {
+                    Log.w("ERROR", "Failed to read value.", error.toException())
+                }
+            })
         }
 
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
@@ -114,7 +116,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
                 for (i in 0 until dataNum) {
                     dataOfAED[i] = value.get(i) as Map<String, Object>
-                    infoOfAED[i] = AedInfo(dataOfAED[i]!!.get("buildAddress").toString(),
+                    infoOfAED[i] = AedInfo(
+                        dataOfAED[i]!!.get("buildAddress").toString(),
                         dataOfAED[i]!!.get("zipcode1").toString(),
                         dataOfAED[i]!!.get("zipcode2").toString(),
                         dataOfAED[i]!!.get("org").toString(),
@@ -123,7 +126,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                         dataOfAED[i]!!.get("manager").toString(),
                         dataOfAED[i]!!.get("managerTel").toString(),
                         dataOfAED[i]!!.get("model").toString()
-                        )
+                    )
                 }
                 // 정보를 위의 반복문에서 넣기 때문에 Null로 연산될 일이 없다.
             }
@@ -152,10 +155,13 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
-        grantResults: IntArray) {
+        grantResults: IntArray
+    ) {
         if (locationSource.onRequestPermissionsResult(
                 requestCode, permissions,
-                grantResults)) {
+                grantResults
+            )
+        ) {
             return
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -205,7 +211,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             cameraLon = marker.position.longitude
 
             // 카메라 무빙
-            var cameraUpdate = CameraUpdate.scrollAndZoomTo(LatLng(cameraLat, cameraLon), 15.0).animate(CameraAnimation.Easing, 500)
+            var cameraUpdate = CameraUpdate.scrollAndZoomTo(LatLng(cameraLat, cameraLon), 15.0)
+                .animate(CameraAnimation.Easing, 500)
             naverMap.moveCamera(cameraUpdate)
 
             /*if (marker.infoWindow == null) {
@@ -218,11 +225,11 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
             var idx: Int = marker.tag as Int
 
-            var textBuildAddress : TextView = root.findViewById(R.id.textBuildAddress)
-            var textOrg : TextView = root.findViewById(R.id.textOrg)
-            var textClerkTel : TextView = root.findViewById(R.id.textClerkTel)
-            var textBuildPlace : TextView = root.findViewById(R.id.textBuildPlace)
-            var textManagerTel : TextView = root.findViewById(R.id.textManagerTel)
+            var textBuildAddress: TextView = root.findViewById(R.id.textBuildAddress)
+            var textOrg: TextView = root.findViewById(R.id.textOrg)
+            var textClerkTel: TextView = root.findViewById(R.id.textClerkTel)
+            var textBuildPlace: TextView = root.findViewById(R.id.textBuildPlace)
+            var textManagerTel: TextView = root.findViewById(R.id.textManagerTel)
 
 
             textBuildAddress.text = infoOfAED[idx]!!.buildAddress
@@ -231,40 +238,72 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             textBuildPlace.text = infoOfAED[idx]!!.buildPlace
             textManagerTel.text = infoOfAED[idx]!!.managerTel
             //매니저에게 전화
-            val mgr_call_btn =root.findViewById<Button>(R.id.btn_call_manager)
-            mgr_call_btn.setOnClickListener(){
-                val itentCall : Intent = Intent(Intent.ACTION_CALL)
+            val mgr_call_btn = root.findViewById<Button>(R.id.btn_call_manager)
+            mgr_call_btn.setOnClickListener() {
+                val itentCall: Intent = Intent(Intent.ACTION_CALL)
                 val phoneNo: String = textManagerTel.text.toString() //건물번호
-                Toast.makeText(MainActivity.applicationContext(),"Please Enter Your Number123",Toast.LENGTH_SHORT)
-                if(phoneNo.trim().isEmpty()){
-                    Toast.makeText(MainActivity.applicationContext(),"Please Enter Your Number",Toast.LENGTH_SHORT)
-                }else{
+                Toast.makeText(
+                    MainActivity.applicationContext(),
+                    "Please Enter Your Number123",
+                    Toast.LENGTH_SHORT
+                )
+                if (phoneNo.trim().isEmpty()) {
+                    Toast.makeText(
+                        MainActivity.applicationContext(),
+                        "Please Enter Your Number",
+                        Toast.LENGTH_SHORT
+                    )
+                } else {
                     itentCall.setData(Uri.parse("tel:" + phoneNo))
                 }
-                if(ActivityCompat.checkSelfPermission(MainActivity.applicationContext(),Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
-                    Toast.makeText(MainActivity.applicationContext(),"Please Grant Permission",Toast.LENGTH_SHORT)
+                if (ActivityCompat.checkSelfPermission(
+                        MainActivity.applicationContext(),
+                        Manifest.permission.CALL_PHONE
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    Toast.makeText(
+                        MainActivity.applicationContext(),
+                        "Please Grant Permission",
+                        Toast.LENGTH_SHORT
+                    )
                     requestionPermission()
 
-                }else{
+                } else {
                     startActivity(itentCall)
                 }
             }
             //건물관리자에게 전화
             val place_call_btn = root.findViewById<Button>(R.id.btn_call_place)
-            place_call_btn.setOnClickListener(){
-                val itentCall : Intent = Intent(Intent.ACTION_CALL)
+            place_call_btn.setOnClickListener() {
+                val itentCall: Intent = Intent(Intent.ACTION_CALL)
                 val phoneNo: String = textClerkTel.text.toString() //건물번호
-                Toast.makeText(MainActivity.applicationContext(),"Please Enter Your Number123",Toast.LENGTH_SHORT)
-                if(phoneNo.trim().isEmpty()){
-                    Toast.makeText(MainActivity.applicationContext(),"Please Enter Your Number",Toast.LENGTH_SHORT)
-                }else{
+                Toast.makeText(
+                    MainActivity.applicationContext(),
+                    "Please Enter Your Number123",
+                    Toast.LENGTH_SHORT
+                )
+                if (phoneNo.trim().isEmpty()) {
+                    Toast.makeText(
+                        MainActivity.applicationContext(),
+                        "Please Enter Your Number",
+                        Toast.LENGTH_SHORT
+                    )
+                } else {
                     itentCall.setData(Uri.parse("tel:" + phoneNo))
                 }
-                if(ActivityCompat.checkSelfPermission(MainActivity.applicationContext(),Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
-                    Toast.makeText(MainActivity.applicationContext(),"Please Grant Permission",Toast.LENGTH_SHORT)
+                if (ActivityCompat.checkSelfPermission(
+                        MainActivity.applicationContext(),
+                        Manifest.permission.CALL_PHONE
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    Toast.makeText(
+                        MainActivity.applicationContext(),
+                        "Please Grant Permission",
+                        Toast.LENGTH_SHORT
+                    )
                     requestionPermission()
 
-                }else{
+                } else {
                     startActivity(itentCall)
                 }
             }
