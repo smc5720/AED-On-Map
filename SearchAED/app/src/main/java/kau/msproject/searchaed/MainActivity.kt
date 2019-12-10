@@ -74,12 +74,6 @@ class MainActivity : AppCompatActivity() {
             ), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        val btnGeo = findViewById<Button>(R.id.btn_geo)
-        btnGeo.setOnClickListener(){
-            val geoIntent = Intent(this,GeoActivity::class.java)
-            startActivity(geoIntent)
-        }
     }
 
 

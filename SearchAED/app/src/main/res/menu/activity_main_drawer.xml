@@ -6,7 +6,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/aed_home"
-            android:title="AED위치찾기"/>
+            android:title="AED위치찾기" />
         <item
             android:id="@+id/aed_youtube"
             android:title="심폐소생술 방법(CPR)"/>

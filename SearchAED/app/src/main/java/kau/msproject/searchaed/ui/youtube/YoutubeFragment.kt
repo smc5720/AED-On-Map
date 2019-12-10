@@ -32,13 +32,6 @@ class YoutubeFragment : Fragment() {
         val cprLink: TextView = root.findViewById(R.id.cpr_link)
         val aedLink: TextView = root.findViewById(R.id.aed_link)
 
-        youtubeViewModel.cpr_text.observe(this, Observer {
-            cprLink.text = it
-        })
-        youtubeViewModel.aed_text.observe(this, Observer {
-            aedLink.text = it
-        })
-
         cprLink.setOnClickListener(View.OnClickListener {
             val intent : Intent = Intent(Intent.ACTION_VIEW)
             intent.setData(Uri.parse("https://www.youtube.com/watch?v=zWv7xsm0Tu8"))

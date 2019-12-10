@@ -9,6 +9,7 @@
     android:paddingTop="16dp"
     android:paddingRight="16dp"
     android:paddingBottom="16dp"
+    android:background="#D10303"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
 
@@ -17,12 +18,16 @@
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
         android:text="주변의 AED를 찾아보세요"
+        android:textSize="20dp"
+        android:fontFamily="@font/jalnan"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="저희가 도와드립니다." />
+        android:fontFamily="@font/jalnan"
+        android:text="저희가 도와드립니다."
+        android:textSize="18dp"/>
 
 </LinearLayout>

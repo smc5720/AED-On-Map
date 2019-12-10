@@ -1,22 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/cpr_link"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        />
-    <TextView
-        android:id="@+id/aed_link"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="53dp"
+            android:src="@drawable/cpr"/>
+
+        <TextView
+            android:id="@+id/cpr_link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jalnan"
+            android:text="  심폐소생술 진행방법"
+            android:textColor="#000000"
+            android:textSize="18dp" />
+
+    </LinearLayout>
+    <androidx.legacy.widget.Space
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        />
+        android:layout_height="5dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="53dp"
+            android:src="@drawable/aed"/>
+        <TextView
+            android:id="@+id/aed_link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jalnan"
+            android:text="  AED 사용방법"
+            android:textColor="#000000"
+            android:textSize="18dp" />
+    </LinearLayout>
 </LinearLayout>

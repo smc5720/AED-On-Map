@@ -44,7 +44,7 @@ class EmergencyActivity2 : AppCompatActivity() {
                 replaceFragment(ThirdFragment.newInstance())
                 //문자발송
                     val phoneNo: String = "123456789" //119번호
-                    val sms: String = "현재" + address + "에 긴급 환자가 발생 했습니다. 도움 요청 부탁드립니다!!"   //문자내용
+                    val sms: String = "현재 " + address + "에 긴급 환자가 발생 했습니다. 도움 요청 부탁드립니다!!"   //문자내용
                     try {
                         var smsManager = SmsManager.getDefault()
                         smsManager.sendTextMessage(phoneNo, null, sms, null, null)
