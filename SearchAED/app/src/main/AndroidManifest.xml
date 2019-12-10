@@ -17,11 +17,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EmergencyAEDActivity"
+        <activity
+            android:name=".GeoActivity"
             android:theme="@style/Theme.MyDialog"/>
-        <activity android:name=".EmergencyCPRActivity"
-            android:theme="@style/Theme.MyDialog"/>
-        <activity android:name=".EmergencyActivity" />
+        <activity
+            android:name=".EmergencyAEDActivity"
+            android:theme="@style/Theme.MyDialog" />
+        <activity
+            android:name=".EmergencyCPRActivity"
+            android:theme="@style/Theme.MyDialog" />
         <activity
             android:name=".EmergencyActivity2"
             android:theme="@style/Theme.MyDialog" />
@@ -34,6 +38,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

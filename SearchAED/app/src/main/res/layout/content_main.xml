@@ -18,5 +18,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/mobile_navigation">
     </fragment>
-
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_geo"
+        android:text="geo"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
