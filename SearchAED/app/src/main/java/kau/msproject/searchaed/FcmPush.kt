@@ -19,7 +19,7 @@ import okhttp3.*
 import java.io.IOException
 //알림 보내기
 class FcmPush() {
-    var JSON = MediaType.parse("application/json; charset=utf-8")
+    val JSON = MediaType.parse("application/json; charset=utf-8")
     var url = "https://fcm.googleapis.com/fcm/send"
     var serverKey = "AIzaSyDiQMKmWLGIYvJKr0yi5s16j1MQqsKO0D8"
     var gson: Gson? = null

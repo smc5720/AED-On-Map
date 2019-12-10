@@ -36,7 +36,6 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/jalnan"
         android:gravity="center"
-        android:text="현위치---입력값 있어야함"
         android:textSize="23dp"
         android:textColor="#000088"
         />

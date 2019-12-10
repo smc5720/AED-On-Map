@@ -32,15 +32,6 @@ public class GeoActivity extends AppCompatActivity {
         lat = intent.getExtras().getDouble("lat");
         lon = intent.getExtras().getDouble("lon");
 
-        Button btnMain = (Button) findViewById(R.id.btn_main);
-        btnMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent mIntent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(mIntent);
-            }
-        });
-
         MyAsyncTask mProcessTask = new MyAsyncTask();
         mProcessTask.execute();
     }
@@ -152,6 +143,9 @@ public class GeoActivity extends AppCompatActivity {
                 Log.d("Result:", "You can't read JSON.");
                 result_val = "Geocoding에 실패했습니다.";
             }
+            Intent resintent = new Intent(getApplicationContext(), EmergencyActivity2.class);
+            resintent.putExtra("address", result_val);
+            startActivity(resintent);
         }
     }
 }

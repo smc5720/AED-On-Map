@@ -75,7 +75,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
            val emergencyButton2 = root.findViewById<Button>(R.id.btn_emergency2)
            emergencyButton2.setOnClickListener(
            ){
-               val emergencyIntent = Intent(activity,EmergencyActivity2::class.java)
+               val emergencyIntent = Intent(activity,GeoActivity::class.java)
                var mylat : Double = 0.0
                var mylon : Double = 0.0
                var database1: FirebaseDatabase = FirebaseDatabase.getInstance()

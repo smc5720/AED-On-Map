@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.telephony.SmsManager
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
@@ -24,6 +25,8 @@ class EmergencyActivity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_emergency2)
 
+        var address: String = intent.extras.getString("address")
+
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.add(R.id.emergency_fragment, FirstFragment.newInstance()).commit()
         ActivityCompat.requestPermissions(
@@ -35,13 +38,13 @@ class EmergencyActivity2 : AppCompatActivity() {
         val btnNext : Button = findViewById(R.id.btn_nextf)
         btnNext.setOnClickListener(){ view ->
             if(frCount == 0){
-                replaceFragment(SecondFragment.newInstance())
+                replaceFragment(SecondFragment.newInstance(address))
                 frCount++
             }else if(frCount == 1){
                 replaceFragment(ThirdFragment.newInstance())
                 //문자발송
                     val phoneNo: String = "123456789" //119번호
-                    val sms: String = "현재 ___위치에 긴급 환자가 발생 했습니다. 도움 요청 부탁드립니다!!"   //문자내용
+                    val sms: String = "현재" + address + "에 긴급 환자가 발생 했습니다. 도움 요청 부탁드립니다!!"   //문자내용
                     try {
                         var smsManager = SmsManager.getDefault()
                         smsManager.sendTextMessage(phoneNo, null, sms, null, null)
