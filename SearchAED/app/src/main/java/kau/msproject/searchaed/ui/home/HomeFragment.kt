@@ -36,13 +36,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
     val dataNum: Int = 100;
     private val REQUEST_CALL: Int = 1
-    /*init {
-        instance = this
-    }*/
-/*
-    fun applicationContext(): Context {
-        return MainActivity.applicationContext()
-    }*/
+
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var locationSource: FusedLocationSource
     private lateinit var root: View
@@ -342,7 +336,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                 val database = FirebaseDatabase.getInstance()
                 val myRef = database.getReference("user")
                 if (tokenID != null) {
-                    //myRef.child(tokenID).setValue("${location.latitude}, ${location.longitude}")
                     myRef.child(tokenID).child("lat").setValue(location.latitude)
                     myRef.child(tokenID).child("lon").setValue(location.longitude)
                 }
@@ -353,9 +346,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
     }
-
+    //통화를 하기 위해 필요한 함수
     fun requestionPermission() {
-        // ActivityCompat.requestPermissions(MainActivity(), arrayOf(Manifest.permission.CALL_PHONE),REQUEST_CALL)
         if (ContextCompat.checkSelfPermission(
                 MainActivity.applicationContext(),
                 Manifest.permission.READ_EXTERNAL_STORAGE

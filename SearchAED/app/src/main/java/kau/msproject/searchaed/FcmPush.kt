@@ -21,11 +21,8 @@ import java.io.IOException
 class FcmPush() {
     val JSON = MediaType.parse("application/json; charset=utf-8")
     var url = "https://fcm.googleapis.com/fcm/send"
-    var serverKey = "AIzaSyDiQMKmWLGIYvJKr0yi5s16j1MQqsKO0D8"
     var gson: Gson? = null
     var okHttpClient: OkHttpClient? = null
-    var database = FirebaseDatabase.getInstance().getReference();
-    var ref = database.child("profiles");
     val tokenID: String? = FirebaseInstanceId.getInstance().getToken()
 
     companion object {
@@ -41,7 +38,6 @@ class FcmPush() {
         var mylat: Double = 0.0
         var mylon: Double = 0.0
         var arr = ArrayList<String>()
-     //   storeDatabase(tokenID, 37.0, 126.0)
         var database1: FirebaseDatabase = FirebaseDatabase.getInstance()
         var databaseReference: DatabaseReference = database1.getReference("user")
         databaseReference.addValueEventListener(object : ValueEventListener {
@@ -50,14 +46,11 @@ class FcmPush() {
                 val tokenData = value.get(tokenID.toString()) as Map<String, Object>
                 var my_lat = tokenData.get("lat")
                 var my_lon = tokenData.get("lon")
-                
+                //데이터베이스에서 자기 위치 정보를 가져옴
                 mylat = my_lat.toString().toDouble()
                 mylon = my_lon.toString().toDouble()
-                //데이터베이스에서 자기 위치 정보를 가져옴
-                val database = FirebaseDatabase.getInstance()
-                val mRef = database.getReference("user")
                 //데이터베이스에서 자기위도값 근처에 있는 사람들의 토큰값을 가져와서 arraylist에 저장함
-                mRef.orderByChild("lat").startAt(mylat - 1).endAt(mylat+1)
+                databaseReference.orderByChild("lat").startAt(mylat - 1).endAt(mylat+1)
                     .addChildEventListener(object : ChildEventListener {
                         override fun onChildAdded(p0: DataSnapshot, p1: String?) {
                             if(p1!=null) arr.add(p1)
@@ -80,9 +73,8 @@ class FcmPush() {
                         }
                     })
                 //데이터베이스에서 자기경도값 근처에 있는 사람들의 토큰값을 가져 온 후 위도값이 저장되어있는 arraylist와 비교하여 일치하면 알림 푸시
-                mRef.orderByChild("lon").startAt(mylon-1).endAt(mylon+1).addChildEventListener(object : ChildEventListener{
+                databaseReference.orderByChild("lon").startAt(mylon-1).endAt(mylon+1).addChildEventListener(object : ChildEventListener{
                     override fun onChildAdded(datasnap: DataSnapshot, Push_token: String?) {
-
                         for(i in 0 until arr.size-1){
                             if(arr.get(i)==Push_token){
                                 var token = Push_token
@@ -91,6 +83,7 @@ class FcmPush() {
                                 pushDTO.notification.title = "위급상황입니다"
                                 pushDTO.notification.body =
                                     "위도 : ${mylat}, 경도 : ${mylon}로 AED를 가지고와 주세요"
+                                //okhttp를 이용하여 알림을 보냄
                                 var body =
                                     okhttp3.RequestBody.create(JSON, gson?.toJson(pushDTO))
                                 var request = okhttp3.Request.Builder()
@@ -117,9 +110,6 @@ class FcmPush() {
                             }
 
                         }
-
-
-
 
                     }
 
@@ -150,13 +140,4 @@ class FcmPush() {
 
     }
 
-    fun storeDatabase(tokenID: String?, latitude: Double, longitude: Double) {
-        val database = FirebaseDatabase.getInstance()
-        val myRef = database.getReference("user")
-        if (tokenID != null) {
-            //myRef.child(tokenID).setValue("${location.latitude}, ${location.longitude}")
-            myRef.child(tokenID).child("lat").setValue(latitude)
-            myRef.child(tokenID).child("lon").setValue(longitude)
-        }
-    }
 }

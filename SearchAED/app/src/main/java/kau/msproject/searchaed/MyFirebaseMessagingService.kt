@@ -19,7 +19,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
      * FirebaseInstanceIdService is deprecated.
      * this is new on firebase-messaging:17.1.0
      */
-    //새로운 토큰이 생길경우 데이터베이스에 저장
+    //새로운 토큰이 생길경우 데이터베이스에 초기값 저장
     override fun onNewToken(token: String) {
         super.onNewToken(token)
         Log.d(TAG, "new Token: $token")
