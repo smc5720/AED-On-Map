@@ -14,7 +14,12 @@
     <fragment
         android:id="@+id/aed_youtube"
         android:name="kau.msproject.searchaed.ui.youtube.YoutubeFragment"
-        android:label="심폐소생술 방법(CPR)"
+        android:label="심정지 환자 관련 영상"
         tools:layout="@layout/youtube_fragment"/>
+    <fragment
+        android:id="@+id/aed_plus"
+        android:name="kau.msproject.searchaed.ui.plus.PlusFragment"
+        android:label="대한심폐소생협회"
+        tools:layout="@layout/plus_fragment" />
 
 </navigation>

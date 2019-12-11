@@ -6,9 +6,12 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/aed_home"
-            android:title="AED위치찾기" />
+            android:title="AED위치 찾기" />
         <item
             android:id="@+id/aed_youtube"
-            android:title="심폐소생술 방법(CPR)"/>
+            android:title="심정지 환자 관련 영상"/>
+        <item
+            android:id="@+id/aed_plus"
+            android:title="대한심폐소생협회 소개"/>
     </group>
 </menu>

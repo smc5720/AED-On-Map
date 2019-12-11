@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CDCFCB"
+    android:orientation="vertical"
+    tools:context=".ui.plus.PlusFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
+            android:src="@drawable/aeduse" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jalnan"
+            android:gravity="center"
+            android:text="평소에 심폐소생술에 관심을 가지고 계신가요?"
+            android:textColor="#000000"
+            android:textSize="18dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/jalnan"
+            android:text="당신 앞에 심정지 환자가 발생한다면 어떻게 하시겠습니까? 타인의 소중한 생명을 구할수 있는 심폐소생술, 이젠 관심을 가질 때 입니다."
+            android:textColor="#000000"
+            android:textSize="16dp" />
+
+        <ImageView
+            android:id="@+id/img_korea_cpr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/koreacpr" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/jalnan"
+            android:text="대한순환기학회와 대한응급의학회에서는 우리나라의 심폐소생술 실정에 대한 인식을 함께 하고 심폐소생술에 관한 표준화를 논의하기 위하여 공동추진위원회(joint steering committee)를 결성한 바 있습니다. 위원회에서는 논의를 거쳐 우리나라에 맞는 심폐소생술에 관한 연구와 지침 제정, 교육 및 보급에 관한 전담기구인 대한심폐소생협회를 2002년 11월 29일에 창립하고, 2004년 11월 6일 보건복지부로부터 사단법인 설립인가를 받아 정식으로 발족하였습니다.
+\n\n대한심폐소생협회에서는 매년 심폐소생술 교육을 개최합니다. 보건의료인 교육과정, 일반인 교육과정이 따로 있으며 한국소생술, 미국소생술 두 분야 모두 교육 진행하고 있습니다. 수료하면 수료증이 발급되며
+관심 있으신 분들은 참여를 해봐도 좋을것 같습니다. \n\n 로고를 클릭하면 대한심폐소생협회 홈페이지로 이동됩니다."
+            android:textColor="#000000"
+            android:textSize="16dp"/>
+    </LinearLayout>
+
+</ScrollView>
