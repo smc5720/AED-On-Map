@@ -1,5 +1,4 @@
-# AED-On-Map
-자동제세동기 위치 추적 어플
+# 자동제세동기 위치 추적 어플
 ![슬라이드2](https://user-images.githubusercontent.com/23237567/170850470-abd933d8-83bd-43fa-a33d-9f82e6340fa7.JPG)
 ![슬라이드3](https://user-images.githubusercontent.com/23237567/170850471-85e35c5c-8051-4a04-a7f9-aa6b9f277641.JPG)
 ![슬라이드4](https://user-images.githubusercontent.com/23237567/170850472-90d38d5e-9cb1-425c-ad67-fd59675f5aaf.JPG)
